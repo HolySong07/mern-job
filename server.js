@@ -84,7 +84,7 @@ app.use('*', (req, res) => {
 	});
 });
 
-const port = process.env.port;
+const PORT = process.env.PORT || 5100;
 
 /* app.listen(port, () => {
 	console.log(`server running on ${port}....`);
@@ -92,8 +92,8 @@ const port = process.env.port;
 
 try {
 	await mongoose.connect(process.env.MONGO_URL);
-	app.listen(port, () => {
-		console.log(`server running on PORT ${port}....`);
+	app.listen(PORT, () => {
+		console.log(`server running on PORT ${PORT}....`);
 	});
 } catch (error) {
 	console.log(error);
