@@ -19,6 +19,9 @@ import errorHandlerMiddleware from './middleware/ErroeHandlerMiddleware.js';
 import authenticateUser from './middleware/authMiddleware.js';
 import cookieParser from 'cookie-parser';
 
+import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
+
 // for uploads
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -33,6 +36,9 @@ cloudinary.config({
 });
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.use(helmet());
+app.use(mongoSanitize());
 
 app.use(express.static(path.resolve(__dirname, './client/dist')));
 app.use(cookieParser());
@@ -52,14 +58,14 @@ if (process.env.NODE_ENV === 'development') {
 
 // for test
 //
-app.post('/api/v1/test2', (req, res) => {
+/* app.post('/api/v1/test2', (req, res) => {
 	const { name } = req.body;
 	res.json({ msg: `hello ${name}` });
 });
 
 app.get('/api/v1/test', (req, res) => {
 	res.json({ msg: 'test route' });
-});
+}); */
 // for test
 
 // for jobs
